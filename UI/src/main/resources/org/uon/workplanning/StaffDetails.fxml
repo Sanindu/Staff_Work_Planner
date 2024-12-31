@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uon.workplanning.StaffDetailsController" spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <Label text="Staff Details" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <TableView fx:id="staffTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="staffIdColumn" text="Staff ID"/>
+            <TableColumn fx:id="fullNameColumn" text="Full Name"/>
+            <TableColumn fx:id="emailColumn" text="Email"/>
+            <TableColumn fx:id="contactNumberColumn" text="Contact Number"/>
+            <TableColumn fx:id="addressColumn" text="Address"/>
+            <TableColumn fx:id="employmentTypeColumn" text="Employment Type"/>
+            <TableColumn fx:id="subjectAreaColumn" text="Subject Area"/>
+            <TableColumn fx:id="lineManagerColumn" text="Line Manager"/>
+            <TableColumn fx:id="roleColumn" text="Role"/>
+        </columns>
+    </TableView>
+    <HBox spacing="10">
+        <Button text="Add New Staff" onAction="#handleAddNewStaff"/>
+        <Button text="Edit Staff" onAction="#handleEditStaff"/>
+        <Button text="Delete Staff" onAction="#handleDeleteStaff"/>
+    </HBox>
+</VBox>
