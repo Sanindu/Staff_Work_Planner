@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uon.workplanning.ActivityDetailsController" spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <Label text="Activity Details" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <TableView fx:id="activityTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="activityIdColumn" text="Activity ID"/>
+            <TableColumn fx:id="typeColumn" text="Type"/>
+            <TableColumn fx:id="activityColumn" text="Activity"/>
+        </columns>
+    </TableView>
+    <HBox spacing="10">
+        <Button text="Add New Staff" onAction="#handleAddNewActivity"/>
+        <Button text="Edit Staff" onAction="#handleEditActivity"/>
+        <Button text="Delete Staff" onAction="#handleDeleteActivity"/>
+    </HBox>
+</VBox>

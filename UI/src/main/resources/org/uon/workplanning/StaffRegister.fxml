@@ -50,7 +50,9 @@
             </FXCollections>
         </items>
     </ComboBox>
-
-    <Button text="Register" onAction="#handleRegister" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
-
+    
+    <HBox spacing="10">
+        <Button text="Register" onAction="#handleRegister" />
+        <Button text="Cancel" onAction="#handleCancel"/>
+    </HBox>
 </VBox>

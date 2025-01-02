@@ -83,7 +83,14 @@ public class StaffRegisterController {
         }
         return staffList;
     }
-
+    @FXML
+    private void handleCancel() {
+        try {
+            StaffRegister.switchToDetailsView();  // Switch back to details view
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
