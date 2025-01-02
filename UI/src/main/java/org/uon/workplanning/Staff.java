@@ -5,8 +5,6 @@ import java.io.Serializable;
 public class Staff implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private static int idCounter = 0;
-
     private int staffId;
     private String fullName;
     private String email;
@@ -18,8 +16,8 @@ public class Staff implements Serializable {
     private String lineManager;
     private String role;
 
-    public Staff(String fullName, String email, String contactNumber, String address, String password, double employmentType, String subjectArea, String lineManager, String role) {
-        this.staffId = ++idCounter;
+    public Staff(int staffId, String fullName, String email, String contactNumber, String address, String password, double employmentType, String subjectArea, String lineManager, String role) {
+        this.staffId = staffId;
         this.fullName = fullName;
         this.email = email;
         this.contactNumber = contactNumber;

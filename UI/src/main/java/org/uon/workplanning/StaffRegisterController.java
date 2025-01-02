@@ -44,8 +44,11 @@ public class StaffRegisterController {
         // Determine the employment type as double
         double employmentTypeValue = "Full Time".equals(employmentType) ? 1.0 : 0.5;
 
+        // Get the last saved staff ID and generate the new ID
+        int newStaffId = getLastStaffId() + 1;
+
         // Create staff object
-        Staff staff = new Staff(fullName, email, contactNumber, address, password, employmentTypeValue, subjectArea, lineManager, role);
+        Staff staff = new Staff(newStaffId, fullName, email, contactNumber, address, password, employmentTypeValue, subjectArea, lineManager, role);
 
         // Read existing staff list
         List<Staff> staffList = readStaffList();
@@ -59,6 +62,11 @@ public class StaffRegisterController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private int getLastStaffId() {
+        List<Staff> staffList = readStaffList();
+        return staffList.stream().mapToInt(Staff::getStaffId).max().orElse(0);
     }
 
     @SuppressWarnings("unchecked")

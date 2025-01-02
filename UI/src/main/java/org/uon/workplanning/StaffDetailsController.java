@@ -3,8 +3,12 @@ package org.uon.workplanning;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -71,24 +75,28 @@ public class StaffDetailsController {
     private void handleEditStaff() {
         Staff selectedStaff = staffTable.getSelectionModel().getSelectedItem();
         if (selectedStaff != null) {
-            // Create and show an alert dialog with text fields for editing
-            TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("Edit Staff");
-            dialog.setHeaderText("Editing Staff ID: " + selectedStaff.getStaffId());
-            dialog.setContentText("Full Name:");
-            dialog.getEditor().setText(selectedStaff.getFullName());
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("EditStaffDetails.fxml"));
+                Parent parent = loader.load();
 
-            dialog.showAndWait().ifPresent(fullName -> {
-                selectedStaff.setFullName(fullName);
-                // Update other fields similarly...
-                // After updating, save the list again
+                EditStaffDetailsController controller = loader.getController();
+                controller.setStaff(selectedStaff);
+
+                Stage stage = new Stage();
+                stage.setTitle("Edit Staff Details");
+                stage.setScene(new Scene(parent));
+                stage.showAndWait();
+
                 saveStaffList();
                 staffTable.refresh();
-            });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             showAlert("No Selection", "Please select a staff to edit.");
         }
     }
+
 
     @FXML
     private void handleDeleteStaff() {
