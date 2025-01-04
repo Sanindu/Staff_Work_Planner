@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uon.workplanning.WorkDetailsController" spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <Label text="Work Details" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <TableView fx:id="workTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="staffIdColumn" text="Staff ID"/>
+            <TableColumn fx:id="fullNameColumn" text="Full Name"/>
+            <TableColumn fx:id="typeColumn" text="Type"/>
+
+        </columns>
+
+    </TableView>
+        <HBox spacing="10">
+            <Button text="Add New Work" onAction="#handleAddNewWork"/>
+            <Button text="Edit Work" onAction="#handleEditWork"/>
+            <Button text="Delete Work" onAction="#handleDeleteWork"/>
+        </HBox>
+</VBox>

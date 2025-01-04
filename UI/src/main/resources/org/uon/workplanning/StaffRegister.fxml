@@ -50,7 +50,6 @@
             </FXCollections>
         </items>
     </ComboBox>
-    
     <HBox spacing="10">
         <Button text="Register" onAction="#handleRegister" />
         <Button text="Cancel" onAction="#handleCancel"/>

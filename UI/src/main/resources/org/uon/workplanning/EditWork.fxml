@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uon.workplanning.EditWorkController" spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <Label text="Edit Work Details" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <GridPane hgap="10" vgap="10">
+        <Label text="Type:"/>
+        <TextField fx:id="typeField" GridPane.columnIndex="1"/>
+        <Label text="Activity:" GridPane.rowIndex="1"/>
+        <TextField fx:id="activityField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label text="Description:" GridPane.rowIndex="2"/>
+        <TextField fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Label text="Week:" GridPane.rowIndex="8"/>
+        <ComboBox fx:id="weekComboBox" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+        <Label text="Duration:" GridPane.rowIndex="3"/>
+        <TextField fx:id="durationField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label text="Instances:" GridPane.rowIndex="6"/>
+        <TextField fx:id="instancesField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+        <Label text="Hours:" GridPane.rowIndex="7"/>
+        <TextField fx:id="hoursField" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+    </GridPane>
+    <HBox spacing="10">
+        <Button text="Save" onAction="#handleSave"/>
+        <Button text="Cancel" onAction="#handleCancel"/>
+    </HBox>
+</VBox>

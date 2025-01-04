@@ -1,6 +1,8 @@
 package org.uon.workplanning;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Staff implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -105,4 +107,5 @@ public class Staff implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
+
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uon.workplanning.WorkCreateController">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <Label text="Staff Id:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="staffIdField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+    <Label text="Type" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextField fx:id="typeField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <Label text="Activity:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <TextField fx:id="activityField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    <Label text="Description:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <TextField fx:id="descriptionField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+    <Label text="Year" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="yearComboBox" GridPane.rowIndex="5" GridPane.columnIndex="1">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Trimester 1"/>
+                <String fx:value="Trimester 2"/>
+                <String fx:value="Trimester 3"/>
+                <String fx:value="All Year"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <Label text="Activity Duration:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <TextField fx:id="activityDurationField" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+    <Label text="Instances:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <TextField fx:id="instancesField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+    <Label text="Hours:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <TextField fx:id="hoursField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+    <HBox spacing="10">
+        <Button text="Add" onAction="#handleSave" />
+        <Button text="Cancel" onAction="#handleCancel"/>
+    </HBox>
+</VBox>
