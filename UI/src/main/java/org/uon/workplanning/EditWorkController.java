@@ -19,8 +19,6 @@ public class EditWorkController {
     private TextField durationField;
     @FXML
     private TextField instancesField;
-    @FXML
-    private TextField hoursField;
 
 
     private Work work;
@@ -33,7 +31,6 @@ public class EditWorkController {
         weekComboBox.setValue(work.getWeek());
         durationField.setText(Integer.toString(work.getDuration()));
         instancesField.setText(Integer.toString(work.getInstances()));
-        hoursField.setText(Integer.toString(work.getHours()));
     }
 
     @FXML
@@ -48,7 +45,7 @@ public class EditWorkController {
         work.setDescription(descriptionField.getText());
         work.setDuration(Integer.parseInt(durationField.getText()));
         work.setInstances(Integer.parseInt(instancesField.getText()));
-        work.setHours(Integer.parseInt(hoursField.getText()));
+        work.setHours(Integer.parseInt(durationField.getText())*Integer.parseInt(instancesField.getText()));
         work.setWeek(weekComboBox.getValue());
 
         // Close the dialog

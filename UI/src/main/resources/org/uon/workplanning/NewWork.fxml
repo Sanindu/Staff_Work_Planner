@@ -40,8 +40,6 @@
     <Label text="Instances:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
     <TextField fx:id="instancesField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
 
-    <Label text="Hours:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-    <TextField fx:id="hoursField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
 
     <HBox spacing="10">
         <Button text="Add" onAction="#handleSave" />

@@ -36,8 +36,6 @@ public class WorkCreateController {
     @FXML
     private TextField instancesField;
 
-     @FXML
-     private TextField hoursField;
 
     public void initialize() {
         yearComboBox.setValue("Trimester 1");
@@ -53,7 +51,7 @@ public class WorkCreateController {
         String week = yearComboBox.getValue();
         int activityDuration = Integer.parseInt(activityDurationField.getText());
         int instances = Integer.parseInt(instancesField.getText());
-        int hours = Integer.parseInt(hoursField.getText());
+        int hours = calHours();
 
         Work work = new Work(newWorkId,staffId,type,activity,description,week,activityDuration, instances,hours);
         List<Work> workList = readWorkList();
@@ -68,7 +66,9 @@ public class WorkCreateController {
         }
     }
 
-
+private int calHours(){
+        return (Integer.parseInt(activityDurationField.getText())*Integer.parseInt(instancesField.getText()));
+}
     private int getLastWorkId() {
         List<Work> workList = readWorkList();
         return workList.stream().mapToInt(Work::getWorkId).max().orElse(0);

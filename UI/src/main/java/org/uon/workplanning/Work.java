@@ -1,5 +1,7 @@
 package org.uon.workplanning;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +20,8 @@ public class Work implements Serializable {
 
 
 
+
+
     public Work(int workId, int staffId, String type, String activity, String description, String week, int duration, int instances, int hours) {
         this.workId = workId;
         this.staffId = staffId;
@@ -28,6 +32,7 @@ public class Work implements Serializable {
         this.duration = duration;
         this.instances = instances;
         this.hours = hours;
+        this.setTypeValue(type, String.valueOf(hours));
     }
 
     public int getWorkId() {
@@ -101,10 +106,25 @@ public class Work implements Serializable {
     public void setHours(int hours) {
         this.hours = hours;
     }
-/*
-    private Map<String, String> typeValues = new HashMap<>();
-    public String getTypeValue(String type) { return typeValues.get(type); }
-    public void setTypeValue(String type, String value) { typeValues.put(type, value); }
 
- */
+    private Map<String, String> typeValues = new HashMap<>();
+
+public Work() {
+    this.typeValues = new HashMap<>();
+}
+// Ensure typeValues map is initialized after deserialization
+private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+    ois.defaultReadObject();
+    if (typeValues == null) {
+        typeValues = new HashMap<>();
+    }
+}
+// Getters and setters for existing fields...
+public String getTypeValue(String type) {
+    return typeValues.get(type);
+}
+    public void setTypeValue(String type, String value) {
+    typeValues.put(type, value);
+}
+
 }

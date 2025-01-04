@@ -14,11 +14,9 @@ public class WorkDetails extends Application {
     public void start(Stage primaryStage) {
         try {
             WorkDetails.primaryStage = primaryStage;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("WorkDetails.fxml"));
-            VBox root = loader.load();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Work Details");
+            Parent root = FXMLLoader.load(getClass().getResource("WorkDetails.fxml"));
+            primaryStage.setTitle("Work Management");
+            primaryStage.setScene(new Scene(root, 800, 600));
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -12,8 +12,18 @@
     <TableView fx:id="workTable" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="staffIdColumn" text="Staff ID"/>
-            <TableColumn fx:id="fullNameColumn" text="Full Name"/>
+            <TableColumn fx:id="nameColumn" text="Full Name"/>
             <TableColumn fx:id="typeColumn" text="Type"/>
+            <TableColumn fx:id="activityColumn" text="Activity"/>
+            <TableColumn fx:id="descriptionColumn" text="Description"/>
+            <TableColumn fx:id="yearColumn" text="Year"/>
+            <TableColumn fx:id="durationColumn" text="Duration"/>
+            <TableColumn fx:id="instancesColumn" text="Instances"/>
+            <TableColumn fx:id="hoursColumn" text="Hours"/>
+            <TableColumn fx:id="t1Column" text="T1"/>
+            <TableColumn fx:id="t2Column" text="T2"/>
+            <TableColumn fx:id="t3Column" text="T3"/>
+            <TableColumn fx:id="allYearColumn" text="All Year"/>
 
         </columns>
 

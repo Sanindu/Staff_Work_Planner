@@ -1,5 +1,8 @@
 package org.uon.workplanning;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,9 +23,30 @@ public class WorkDetailsController {
     @FXML
     private TableColumn<Work, String> staffIdColumn;
     @FXML
-    private TableColumn<Work, String> fullNameColumn;
+    private TableColumn<Work, String> nameColumn;
     @FXML
     private TableColumn<Work, String> typeColumn;
+    @FXML
+    private TableColumn<Work, String> activityColumn;
+    @FXML
+    private TableColumn<Work, String> descriptionColumn;
+    @FXML
+    private TableColumn<Work, String> yearColumn;
+    @FXML
+    private TableColumn<Work, Integer> durationColumn;
+    @FXML
+    private  TableColumn<Work,Integer> instancesColumn;
+    @FXML
+    private TableColumn<Work, Integer> hoursColumn;
+    @FXML
+    private TableColumn<Work, Integer> t1Column;
+    @FXML
+    private TableColumn<Work, Integer> t2Column;
+    @FXML
+    private TableColumn<Work, Integer> t3Column;
+    @FXML
+    private TableColumn<Work, Integer> allYearColumn;
+
 
 
     private Set<String> distinctTypes = new HashSet<>();
@@ -30,13 +54,60 @@ public class WorkDetailsController {
     public void initialize() {
         loadDistinctTypes();
         addTypeColumns();
+
+
+        staffIdColumn.setCellValueFactory(new PropertyValueFactory<>("staffId"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        activityColumn.setCellValueFactory(new PropertyValueFactory<>("activity"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        yearColumn.setCellValueFactory(new PropertyValueFactory<>("week"));
+        durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        instancesColumn.setCellValueFactory(new PropertyValueFactory<>("instances"));
+        hoursColumn.setCellValueFactory(new PropertyValueFactory<>("hours"));
+
+
+        workTable.setItems(getWorkList());
     }
 
-    // Method to load distinct types from activity.ser
+    // Loading the workdetails.ser file
+    private ObservableList<Work> getWorkList() {
+        List<Work> workList = new ArrayList<>();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("workdetails.ser"))) {
+            workList = (List<Work>) ois.readObject();
+            // Ensure typeValues map is initialized for each Work instance
+            for (Work work : workList) {
+                if (work.getTypeValue("dummy") == null) { // Checking with a dummy key
+                    work.setTypeValue("dummy", ""); // Initialize the map
+                    work.setTypeValue("dummy", null); // Remove the dummy entry
+                }
+            }
+        } catch (EOFException e) {
+            // End of file reached, no more work details to read
+        } catch (FileNotFoundException e) {
+            // File not found, return empty list
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return FXCollections.observableArrayList(workList);
+    }
+
+
+    // Saving the workdetails.ser file
+    private void saveWorkList() {
+        List<Work> workList = new ArrayList<>(workTable.getItems());
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("workdetails.ser"))) {
+            oos.writeObject(workList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // Method to load distinct types from workdetails.ser
     private void loadDistinctTypes() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("activity.ser"))) {
-            List<Activity> activities = (List<Activity>) ois.readObject();
-            for (Activity activity : activities) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("workdetails.ser"))) {
+            List<Work> activities = (List<Work>) ois.readObject();
+            for (Work activity : activities) {
                 distinctTypes.add(activity.getType());
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -48,11 +119,21 @@ public class WorkDetailsController {
     private void addTypeColumns() {
         for (String type : distinctTypes) {
             TableColumn<Work, String> typeColumn = new TableColumn<>(type);
-            typeColumn.setCellValueFactory(new PropertyValueFactory<>(type));
+            typeColumn.setCellValueFactory(cellData -> {
+                Work work = cellData.getValue();
+                return new SimpleStringProperty(work.getTypeValue(type));
+            });
             typeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+            typeColumn.setOnEditCommit(event -> {
+                Work work = event.getRowValue();
+                work.setTypeValue(type, event.getNewValue());
+                saveWorkList(); // Save changes to the file
+            });
             workTable.getColumns().add(typeColumn);
         }
     }
+
+
 
     @FXML
     private void handleEditWork() {
@@ -94,15 +175,10 @@ public class WorkDetailsController {
     @FXML
     private void handleAddNewWork() {
         WorkDetails.switchToNewWorkView();
+
     }
-    private void saveWorkList() {
-        List<Work> workList = new ArrayList<>(workTable.getItems());
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("workdetails.ser"))) {
-            oos.writeObject(workList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
