@@ -47,14 +47,11 @@ public class WorkDetailsController {
     @FXML
     private TableColumn<Work, Integer> allYearColumn;
 
-
-
     private Set<String> distinctTypes = new HashSet<>();
 
     public void initialize() {
         loadDistinctTypes();
         addTypeColumns();
-
 
         staffIdColumn.setCellValueFactory(new PropertyValueFactory<>("staffId"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -64,7 +61,10 @@ public class WorkDetailsController {
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
         instancesColumn.setCellValueFactory(new PropertyValueFactory<>("instances"));
         hoursColumn.setCellValueFactory(new PropertyValueFactory<>("hours"));
-
+        t1Column.setCellValueFactory(new PropertyValueFactory<>("t1"));
+        t2Column.setCellValueFactory(new PropertyValueFactory<>("t2"));
+        t3Column.setCellValueFactory(new PropertyValueFactory<>("t3"));
+        allYearColumn.setCellValueFactory(new PropertyValueFactory<>("allYear"));
 
         workTable.setItems(getWorkList());
     }
@@ -91,7 +91,6 @@ public class WorkDetailsController {
         return FXCollections.observableArrayList(workList);
     }
 
-
     // Saving the workdetails.ser file
     private void saveWorkList() {
         List<Work> workList = new ArrayList<>(workTable.getItems());
@@ -101,7 +100,6 @@ public class WorkDetailsController {
             e.printStackTrace();
         }
     }
-
 
     // Method to load distinct types from workdetails.ser
     private void loadDistinctTypes() {
@@ -161,7 +159,6 @@ public class WorkDetailsController {
         }
     }
 
-
     @FXML
     private void handleDeleteWork() {
         Work selectedWork = workTable.getSelectionModel().getSelectedItem();
@@ -175,10 +172,7 @@ public class WorkDetailsController {
     @FXML
     private void handleAddNewWork() {
         WorkDetails.switchToNewWorkView();
-
     }
-
-
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

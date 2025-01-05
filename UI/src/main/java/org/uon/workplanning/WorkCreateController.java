@@ -52,8 +52,25 @@ public class WorkCreateController {
         int activityDuration = Integer.parseInt(activityDurationField.getText());
         int instances = Integer.parseInt(instancesField.getText());
         int hours = calHours();
-
-        Work work = new Work(newWorkId,staffId,type,activity,description,week,activityDuration, instances,hours);
+int t1 =0;
+int t2 =0;
+int t3 = 0;
+int allYear =0;
+        switch (week){
+            case "Trimester 1":
+                 t1 = hours;
+                break;
+            case "Trimester 2":
+                 t2 =hours;
+                break;
+            case "Trimester 3":
+                 t3 = hours;
+                break;
+            case "All Year":
+                 allYear = hours;
+                break;
+        }
+        Work work = new Work(newWorkId,staffId,type,activity,description,week,activityDuration, instances,hours,t1,t2,t3,allYear);
         List<Work> workList = readWorkList();
         workList.add(work);
 

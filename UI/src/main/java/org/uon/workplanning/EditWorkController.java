@@ -45,9 +45,35 @@ public class EditWorkController {
         work.setDescription(descriptionField.getText());
         work.setDuration(Integer.parseInt(durationField.getText()));
         work.setInstances(Integer.parseInt(instancesField.getText()));
-        work.setHours(Integer.parseInt(durationField.getText())*Integer.parseInt(instancesField.getText()));
+        int totalHours = Integer.parseInt(durationField.getText())*Integer.parseInt(instancesField.getText());
+        work.setHours(totalHours);
         work.setWeek(weekComboBox.getValue());
-
+        switch (weekComboBox.getValue()){
+            case "Trimester 1":
+               work.setT1(totalHours);
+               work.setT2(0);
+               work.setT3(0);
+               work.setAllYear(0);
+                break;
+            case "Trimester 2":
+                work.setT1(0);
+                work.setT2(totalHours);
+                work.setT3(0);
+                work.setAllYear(0);
+                break;
+            case "Trimester 3":
+                work.setT1(0);
+                work.setT2(0);
+                work.setT3(totalHours);
+                work.setAllYear(0);
+                break;
+            case "All Year":
+                work.setT1(0);
+                work.setT2(0);
+                work.setT3(0);
+                work.setAllYear(totalHours);
+                break;
+        }
         // Close the dialog
         Stage stage = (Stage) typeField.getScene().getWindow();
         stage.close();
