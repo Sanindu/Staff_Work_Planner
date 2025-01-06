@@ -17,9 +17,9 @@
         </columns>
     </TableView>
     <HBox spacing="10">
-        <Button text="Add New Staff" onAction="#handleAddNewActivity"/>
-        <Button text="Edit Staff" onAction="#handleEditActivity"/>
-        <Button text="Delete Staff" onAction="#handleDeleteActivity"/>
+        <Button text="Add New Activity" onAction="#handleAddNewActivity"/>
+        <Button text="Edit Activity" onAction="#handleEditActivity"/>
+        <Button text="Delete Activity" onAction="#handleDeleteActivity"/>
         <Button text="Refresh" onAction="#handleRefresh"/>
     </HBox>
 </VBox>
