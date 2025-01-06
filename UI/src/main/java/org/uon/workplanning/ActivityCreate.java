@@ -21,23 +21,23 @@ public class ActivityCreate extends Application {
         }
     }
 
-    public static void switchToCreateView() {
-        try {
-            Parent root = FXMLLoader.load(StaffRegister.class.getResource("NewActivity.fxml"));
-            primaryStage.setScene(new Scene(root, 400, 450));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void switchToDetailsView() {
-        try {
-            Parent root = FXMLLoader.load(StaffRegister.class.getResource("ActivityDetails.fxml"));
-            primaryStage.setScene(new Scene(root, 800, 600));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void switchToCreateView() {
+//        try {
+//            Parent root = FXMLLoader.load(StaffRegister.class.getResource("NewActivity.fxml"));
+//            primaryStage.setScene(new Scene(root, 400, 450));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public static void switchToDetailsView() {
+//        try {
+//            Parent root = FXMLLoader.load(StaffRegister.class.getResource("ActivityDetails.fxml"));
+//            primaryStage.setScene(new Scene(root, 800, 600));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
     public static void main(String[] args) {
         launch(args);
     }

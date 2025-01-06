@@ -25,6 +25,7 @@ public class ActivityDetailsController {
     @FXML
     private TableColumn<Activity, String> activityColumn;
 
+    private ObservableList<Activity> activityList = FXCollections.observableArrayList();
     @FXML
     private void initialize() {
         activityIdColumn.setCellValueFactory(new PropertyValueFactory<>("activityId"));
@@ -50,7 +51,16 @@ public class ActivityDetailsController {
 
     @FXML
     private void handleAddNewActivity() {
-        ActivityCreate.switchToCreateView();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("NewActivity.fxml"));
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Add New Activity");
+            stage.setScene(new Scene(parent));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -99,6 +109,12 @@ public class ActivityDetailsController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void handleRefresh() {
+        activityList = getActivityList();
+        activityTable.setItems(activityList);
+    }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

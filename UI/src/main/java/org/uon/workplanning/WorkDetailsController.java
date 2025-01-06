@@ -123,9 +123,7 @@ public class WorkDetailsController {
                 }
             }
         } catch (EOFException e) {
-            // End of file reached, no more work details to read
         } catch (FileNotFoundException e) {
-            // File not found, return empty list
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -240,7 +238,17 @@ public class WorkDetailsController {
     }
     @FXML
     private void handleAddNewWork() {
-        WorkDetails.switchToNewWorkView();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("NewWork.fxml"));
+            Parent parent = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Add New Work");
+            stage.setScene(new Scene(parent));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     private void handleShowTotalHours() {

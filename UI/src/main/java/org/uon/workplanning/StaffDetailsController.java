@@ -36,7 +36,7 @@ public class StaffDetailsController {
     private TableColumn<Staff, String> lineManagerColumn;
     @FXML
     private TableColumn<Staff, String> roleColumn;
-
+    private ObservableList<Staff> staffList = FXCollections.observableArrayList();
     @FXML
     private void initialize() {
         staffIdColumn.setCellValueFactory(new PropertyValueFactory<>("staffId"));
@@ -68,7 +68,17 @@ public class StaffDetailsController {
 
     @FXML
     private void handleAddNewStaff() {
-        StaffRegister.switchToRegisterView();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffRegister.fxml"));
+            Parent parent = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent, 700, 500));
+            stage.setTitle("Add New Staff");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -117,7 +127,11 @@ public class StaffDetailsController {
             e.printStackTrace();
         }
     }
-
+    @FXML
+    private void handleRefresh() {
+        staffList = getStaffList();
+        staffTable.setItems(staffList);
+    }
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);

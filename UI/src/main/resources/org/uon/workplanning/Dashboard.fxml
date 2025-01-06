@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uon.workplanning.DashboardController" hgap="20" vgap="20" alignment="CENTER" stylesheets="@dashboard.css">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <VBox fx:id="staffTile" alignment="CENTER" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="tile">
+        <ImageView>
+            <image>
+                <Image url="@staff_icon.png"/>
+            </image>
+        </ImageView>
+        <Label text="Staff" styleClass="tile-label"/>
+    </VBox>
+
+    <VBox fx:id="workDetailsTile" alignment="CENTER" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="tile">
+        <ImageView>
+            <image>
+                <Image url="@work_details_icon.png"/>
+            </image>
+        </ImageView>
+        <Label text="Work Details" styleClass="tile-label"/>
+    </VBox>
+
+    <VBox fx:id="activityTile" alignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="tile">
+        <ImageView>
+            <image>
+                <Image url="@activity_icon.png"/>
+            </image>
+        </ImageView>
+        <Label text="Activity" styleClass="tile-label"/>
+    </VBox>
+
+    <VBox fx:id="csvUploadTile" alignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="tile">
+        <ImageView>
+            <image>
+                <Image url="@csv_icon.png"/>
+            </image>
+        </ImageView>
+        <Label text="CSV Upload" styleClass="tile-label"/>
+    </VBox>
+</GridPane>

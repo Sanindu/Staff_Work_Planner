@@ -2,6 +2,7 @@ package org.uon.workplanning;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -58,7 +59,9 @@ public class StaffRegisterController {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("staff.ser"))) {
             oos.writeObject(staffList);
             showAlert("Success", "Staff registered successfully!");
-            StaffRegister.switchToDetailsView();  // Switch back to details view
+            Stage stage = (Stage) emailField.getScene().getWindow();
+            stage.close();
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -85,11 +88,8 @@ public class StaffRegisterController {
     }
     @FXML
     private void handleCancel() {
-        try {
-            StaffRegister.switchToDetailsView();  // Switch back to details view
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        Stage stage = (Stage) emailField.getScene().getWindow();
+        stage.close();
     }
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

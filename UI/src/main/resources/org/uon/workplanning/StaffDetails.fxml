@@ -26,5 +26,6 @@
         <Button text="Add New Staff" onAction="#handleAddNewStaff"/>
         <Button text="Edit Staff" onAction="#handleEditStaff"/>
         <Button text="Delete Staff" onAction="#handleDeleteStaff"/>
+        <Button text="Refresh" onAction="#handleRefresh"/>
     </HBox>
 </VBox>

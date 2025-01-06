@@ -14,19 +14,15 @@ public class ActivityController {
     private TextField typeField;
     @FXML
     private TextField activityField;
-
     @FXML
     private void handleCreate() {
         String type = typeField.getText();
         String activity = activityField.getText();
 
-        // Get the last saved staff ID and generate the new ID
         int newactivityId = getLastActivityId() + 1;
-
 
         Activity activityObj = new Activity(newactivityId, type, activity);
 
-        // Read existing  list
         List<Activity> activityList = readActivityList();
         activityList.add(activityObj);
 
@@ -34,8 +30,8 @@ public class ActivityController {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("activity.ser"))) {
             oos.writeObject(activityList);
             showAlert("Success", "Activity added successfully!");
-
-            ActivityCreate.switchToDetailsView();  // Switch back to details view
+            Stage stage = (Stage) typeField.getScene().getWindow();
+            stage.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -52,9 +48,7 @@ public class ActivityController {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("activity.ser"))) {
             activityList = (List<Activity>) ois.readObject();
         } catch (EOFException e) {
-            // End of file reached, return empty list
         } catch (FileNotFoundException e) {
-            // File not found, return empty list
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,12 +57,8 @@ public class ActivityController {
 
     @FXML
     private void handleCancel() {
-        try{
-        ActivityCreate.switchToDetailsView();  // Switch back to details view
-    } catch (Exception ex) {
-        ex.printStackTrace();
-    }
-
+        Stage stage = (Stage) typeField.getScene().getWindow();
+        stage.close();
     }
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

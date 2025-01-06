@@ -1,0 +1,22 @@
+.red-cell {
+    -fx-background-color: red;
+}
+/* styles.css */
+.stack-pane {
+    -fx-font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-field, .password-field {
+    -fx-background-color: rgba(255, 255, 255, 1.0);
+    -fx-background-insets: 0;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20;
+}

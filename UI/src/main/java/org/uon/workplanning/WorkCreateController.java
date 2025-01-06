@@ -46,7 +46,6 @@ public class WorkCreateController {
         loadTypes();
         loadActivity();
     }
-
     private void loadStaffIds() {
         List<String> staffIds = readStaffList().stream()
                 .map(staff -> String.valueOf(staff.getStaffId()))
@@ -153,7 +152,8 @@ int allYear =0;
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("workdetails.ser"))) {
             oos.writeObject(workList);
             showAlert("Success", "New work details added successfully!");
-              WorkDetails.switchToDetailsView();
+            Stage stage = (Stage) descriptionField.getScene().getWindow();
+            stage.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -192,10 +192,7 @@ private int calHours(){
     }
     @FXML
     private void handleCancel() {
-        try {
-            WorkDetails.switchToDetailsView();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        Stage stage = (Stage) descriptionField.getScene().getWindow();
+        stage.close();
     }
 }
