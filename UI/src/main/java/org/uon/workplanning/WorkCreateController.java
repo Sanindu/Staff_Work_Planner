@@ -88,7 +88,7 @@ public class WorkCreateController {
 
     private void loadActivity() {
         List<String> activityIds = readActivityList().stream()
-                .map(activity -> String.valueOf(activity.getType()))
+                .map(activity -> String.valueOf(activity.getActivity()))
                 .collect(Collectors.toList());
         ObservableList<String> observableActivityIds = FXCollections.observableArrayList(activityIds);
         activityComboBox.setItems(observableActivityIds);
