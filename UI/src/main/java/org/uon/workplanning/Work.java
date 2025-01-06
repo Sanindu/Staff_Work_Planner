@@ -159,7 +159,6 @@ private void readObject(ObjectInputStream ois) throws IOException, ClassNotFound
         typeValues = new HashMap<>();
     }
 }
-// Getters and setters for existing fields...
 public String getTypeValue(String type) {
     return typeValues.get(type);
 }

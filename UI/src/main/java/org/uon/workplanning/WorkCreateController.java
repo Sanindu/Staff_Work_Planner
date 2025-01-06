@@ -1,5 +1,7 @@
 package org.uon.workplanning;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -13,16 +15,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class WorkCreateController {
     @FXML
-    private TextField staffIdField;
+    private ComboBox<String> staffIdComboBox;
 
     @FXML
-    private TextField typeField;
+    private ComboBox<String> typeComboBox;
 
     @FXML
-    private TextField activityField;
+    private ComboBox<String>  activityComboBox;
 
     @FXML
     private TextField descriptionField;
@@ -39,14 +42,77 @@ public class WorkCreateController {
 
     public void initialize() {
         yearComboBox.setValue("Trimester 1");
+        loadStaffIds();
+        loadTypes();
+        loadActivity();
+    }
+
+    private void loadStaffIds() {
+        List<String> staffIds = readStaffList().stream()
+                .map(staff -> String.valueOf(staff.getStaffId()))
+                .collect(Collectors.toList());
+        ObservableList<String> observableStaffIds = FXCollections.observableArrayList(staffIds);
+        staffIdComboBox.setItems(observableStaffIds);
+    }
+
+    private List<Staff> readStaffList() {
+        List<Staff> staffList = new ArrayList<>();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("staff.ser"))) {
+            staffList = (List<Staff>) ois.readObject();
+        } catch (EOFException | FileNotFoundException e) {
+            // Handle exceptions
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return staffList;
+    }
+
+    private void loadTypes() {
+        List<String> typeIds = readTypeList().stream()
+                .map(type -> String.valueOf(type.getType()))
+                .collect(Collectors.toList());
+        ObservableList<String> observableTypeIds = FXCollections.observableArrayList(typeIds);
+        typeComboBox.setItems(observableTypeIds);
+    }
+
+    private List<Activity> readTypeList() {
+        List<Activity> activityList = new ArrayList<>();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("activity.ser"))) {
+            activityList = (List<Activity>) ois.readObject();
+        } catch (EOFException | FileNotFoundException e) {
+            // Handle exceptions
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return activityList;
+    }
+
+    private void loadActivity() {
+        List<String> activityIds = readActivityList().stream()
+                .map(activity -> String.valueOf(activity.getType()))
+                .collect(Collectors.toList());
+        ObservableList<String> observableActivityIds = FXCollections.observableArrayList(activityIds);
+        activityComboBox.setItems(observableActivityIds);
+    }
+
+    private List<Activity> readActivityList() {
+        List<Activity> activityList = new ArrayList<>();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("activity.ser"))) {
+            activityList = (List<Activity>) ois.readObject();
+        } catch (EOFException | FileNotFoundException e) {
+            // Handle exceptions
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return activityList;
     }
 
     @FXML
     private void handleSave() {
         int newWorkId = getLastWorkId() + 1;
-        int staffId = Integer.parseInt(staffIdField.getText());
-        String type = typeField.getText();
-        String activity = activityField.getText();
+        int staffId = Integer.parseInt(staffIdComboBox.getValue());
+        String type = typeComboBox.getValue();
+        String activity = activityComboBox.getValue();
         String description = descriptionField.getText();
         String week = yearComboBox.getValue();
         int activityDuration = Integer.parseInt(activityDurationField.getText());

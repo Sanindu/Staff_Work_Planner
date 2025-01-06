@@ -11,13 +11,13 @@
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
     <Label text="Staff Id:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-    <TextField fx:id="staffIdField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <ComboBox fx:id="staffIdComboBox" editable="true" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
     <Label text="Type" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-    <TextField fx:id="typeField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <ComboBox fx:id="typeComboBox" editable="true" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
     <Label text="Activity:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-    <TextField fx:id="activityField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <ComboBox fx:id="activityComboBox" editable="true" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
     <Label text="Description:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
     <TextField fx:id="descriptionField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>

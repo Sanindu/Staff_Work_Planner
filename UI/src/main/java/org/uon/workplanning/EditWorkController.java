@@ -7,10 +7,7 @@ import javafx.stage.Stage;
 
 public class EditWorkController {
 
-    @FXML
-    private TextField typeField;
-    @FXML
-    private TextField activityField;
+
     @FXML
     private TextField descriptionField;
     @FXML
@@ -25,8 +22,6 @@ public class EditWorkController {
 
     public void setWork(Work work) {
         this.work = work;
-        typeField.setText(work.getType());
-        activityField.setText(work.getActivity());
         descriptionField.setText(work.getDescription());
         weekComboBox.setValue(work.getWeek());
         durationField.setText(Integer.toString(work.getDuration()));
@@ -40,8 +35,6 @@ public class EditWorkController {
 
     @FXML
     private void handleSave() {
-        work.setType(typeField.getText());
-        work.setActivity(activityField.getText());
         work.setDescription(descriptionField.getText());
         work.setDuration(Integer.parseInt(durationField.getText()));
         work.setInstances(Integer.parseInt(instancesField.getText()));
@@ -75,14 +68,14 @@ public class EditWorkController {
                 break;
         }
         // Close the dialog
-        Stage stage = (Stage) typeField.getScene().getWindow();
+        Stage stage = (Stage) descriptionField.getScene().getWindow();
         stage.close();
     }
 
     @FXML
     private void handleCancel() {
         // Close the dialog without saving
-        Stage stage = (Stage) typeField.getScene().getWindow();
+        Stage stage = (Stage) descriptionField.getScene().getWindow();
         stage.close();
     }
 }

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.*;
+import java.util.Properties;
 
 public class WorkDetailsController {
     @FXML
@@ -48,8 +49,10 @@ public class WorkDetailsController {
     private TableColumn<Work, Integer> allYearColumn;
 
     private Set<String> distinctTypes = new HashSet<>();
+    private Map<String, String> staffData = new HashMap<>();
 
     public void initialize() {
+        loadStaffData();
         loadDistinctTypes();
         addTypeColumns();
 
@@ -65,9 +68,27 @@ public class WorkDetailsController {
         t2Column.setCellValueFactory(new PropertyValueFactory<>("t2"));
         t3Column.setCellValueFactory(new PropertyValueFactory<>("t3"));
         allYearColumn.setCellValueFactory(new PropertyValueFactory<>("allYear"));
+        nameColumn.setCellValueFactory(cellData -> {
+            Work work = cellData.getValue();
+            String staffId = String.valueOf(work.getStaffId());
+            return new SimpleStringProperty(staffData.getOrDefault(staffId, "Unknown"));
+        });
 
         workTable.setItems(getWorkList());
     }
+
+    // Method to load staff data from staff.ser
+    private void loadStaffData() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("staff.ser"))) {
+            List<Staff> staffList = (List<Staff>) ois.readObject();
+            for (Staff staff : staffList) {
+                staffData.put(String.valueOf(staff.getStaffId()), staff.getFullName());
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     // Loading the workdetails.ser file
     private ObservableList<Work> getWorkList() {
@@ -106,6 +127,9 @@ public class WorkDetailsController {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("workdetails.ser"))) {
             List<Work> activities = (List<Work>) ois.readObject();
             for (Work activity : activities) {
+                if(activity.getType().equals("ATSR")){
+                    distinctTypes.add("TS");
+                    }
                 distinctTypes.add(activity.getType());
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -119,6 +143,17 @@ public class WorkDetailsController {
             TableColumn<Work, String> typeColumn = new TableColumn<>(type);
             typeColumn.setCellValueFactory(cellData -> {
                 Work work = cellData.getValue();
+                if (work.getType().equals("ATSR")) {
+                    // Set the value of 'TS' column to 1.2 * hours value
+                    double tsWeight = Double.parseDouble((ConfigLoader.getTSValue()));
+                    double tsVale =(tsWeight * work.getHours());
+                    String formattedValue = String.format("%.2f", tsVale);
+                    System.out.println(tsVale);
+                    work.setTypeValue("TS", formattedValue);
+                }
+                else{
+                    work.setTypeValue("TS", "0");
+                }
                 return new SimpleStringProperty(work.getTypeValue(type));
             });
             typeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -130,8 +165,6 @@ public class WorkDetailsController {
             workTable.getColumns().add(typeColumn);
         }
     }
-
-
 
     @FXML
     private void handleEditWork() {
@@ -148,6 +181,15 @@ public class WorkDetailsController {
                 stage.setTitle("Edit Work Details");
                 stage.setScene(new Scene(parent));
                 stage.showAndWait();
+                if (selectedWork.getType().equals("ATSR")) {
+                    double tsWeight = Double.parseDouble(ConfigLoader.getTSValue());
+                    double tsVal = (tsWeight * selectedWork.getHours());
+                    String formattedValue = String.format("%.2f", tsVal);
+                    selectedWork.setTypeValue("TS", formattedValue);
+                }
+                else{
+                    selectedWork.setTypeValue("TS", "0");
+                }
 
                 saveWorkList();
                 workTable.refresh();
