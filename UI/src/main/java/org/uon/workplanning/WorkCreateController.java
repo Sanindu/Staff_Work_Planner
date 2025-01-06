@@ -136,7 +136,17 @@ int allYear =0;
                  allYear = hours;
                 break;
         }
-        Work work = new Work(newWorkId,staffId,type,activity,description,week,activityDuration, instances,hours,t1,t2,t3,allYear);
+        double sum = 0;
+        if (type.equals("ATSR")){
+            double tsWeight = Double.parseDouble((ConfigLoader.getTSValue()));
+            double tsVale =(tsWeight * hours);
+            sum = (hours+tsVale);
+        }
+        else {
+            sum = hours;
+        }
+
+        Work work = new Work(newWorkId,staffId,type,activity,description,week,activityDuration, instances,hours,t1,t2,t3,allYear,sum);
         List<Work> workList = readWorkList();
         workList.add(work);
 

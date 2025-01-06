@@ -47,6 +47,8 @@ public class WorkDetailsController {
     private TableColumn<Work, Integer> t3Column;
     @FXML
     private TableColumn<Work, Integer> allYearColumn;
+    @FXML
+    private  TableColumn <Work,Double> sumColumn;
 
     private Set<String> distinctTypes = new HashSet<>();
     private Map<String, String> staffData = new HashMap<>();
@@ -68,6 +70,7 @@ public class WorkDetailsController {
         t2Column.setCellValueFactory(new PropertyValueFactory<>("t2"));
         t3Column.setCellValueFactory(new PropertyValueFactory<>("t3"));
         allYearColumn.setCellValueFactory(new PropertyValueFactory<>("allYear"));
+        sumColumn.setCellValueFactory(new PropertyValueFactory<>("sum"));
         nameColumn.setCellValueFactory(cellData -> {
             Work work = cellData.getValue();
             String staffId = String.valueOf(work.getStaffId());
@@ -148,7 +151,6 @@ public class WorkDetailsController {
                     double tsWeight = Double.parseDouble((ConfigLoader.getTSValue()));
                     double tsVale =(tsWeight * work.getHours());
                     String formattedValue = String.format("%.2f", tsVale);
-                    System.out.println(tsVale);
                     work.setTypeValue("TS", formattedValue);
                 }
                 else{
@@ -190,6 +192,14 @@ public class WorkDetailsController {
                 else{
                     selectedWork.setTypeValue("TS", "0");
                 }
+                if (selectedWork.getType().equals("ATSR")){
+                    double tsWeight = Double.parseDouble((ConfigLoader.getTSValue()));
+                    double tsVale =(tsWeight * selectedWork.getHours());
+                    selectedWork.setSum(selectedWork.getHours()+tsVale);
+                }
+                else {
+                     selectedWork.setSum(selectedWork.getHours());
+                }
 
                 saveWorkList();
                 workTable.refresh();
@@ -214,6 +224,20 @@ public class WorkDetailsController {
     @FXML
     private void handleAddNewWork() {
         WorkDetails.switchToNewWorkView();
+    }
+    @FXML
+    private void handleShowTotalHours() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("TotalHours.fxml"));
+            Parent parent = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Total Hours");
+            stage.setScene(new Scene(parent));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showAlert(String title, String message) {

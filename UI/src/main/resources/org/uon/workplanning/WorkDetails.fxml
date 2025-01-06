@@ -24,6 +24,7 @@
             <TableColumn fx:id="t2Column" text="T2"/>
             <TableColumn fx:id="t3Column" text="T3"/>
             <TableColumn fx:id="allYearColumn" text="All Year"/>
+            <TableColumn fx:id="sumColumn" text="Sum"/>
 
         </columns>
 
@@ -32,5 +33,6 @@
             <Button text="Add New Work" onAction="#handleAddNewWork"/>
             <Button text="Edit Work" onAction="#handleEditWork"/>
             <Button text="Delete Work" onAction="#handleDeleteWork"/>
+            <Button text="Total Hours" onAction="#handleShowTotalHours"/>
         </HBox>
 </VBox>

@@ -22,6 +22,16 @@ private int t1;
 private int t2;
 private int t3;
 
+private double sum;
+
+    public double getSum() {
+        return sum;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
+    }
+
     public int getT1() {
         return t1;
     }
@@ -58,7 +68,7 @@ private int t3;
 
 
 
-    public Work(int workId, int staffId, String type, String activity, String description, String week, int duration, int instances, int hours, int t1, int t2, int t3, int allYear) {
+    public Work(int workId, int staffId, String type, String activity, String description, String week, int duration, int instances, int hours, int t1, int t2, int t3, int allYear, double sum) {
         this.workId = workId;
         this.staffId = staffId;
         this.type = type;
@@ -72,6 +82,7 @@ private int t3;
         this.t2 = t2;
         this.t3 = t3;
         this.allYear = allYear;
+        this.sum = sum;
         this.setTypeValue(type, String.valueOf(hours));
     }
 

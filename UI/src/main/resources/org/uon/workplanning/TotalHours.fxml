@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uon.workplanning.TotalHoursController" spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <Label text="Total Hours" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <TableView fx:id="totalHoursTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="staffIdColumn" text="Staff ID"/>
+            <TableColumn fx:id="fullNameColumn" text="Full Name"/>
+            <TableColumn fx:id="totalHoursColumn" text="Total Hours"/>
+        </columns>
+    </TableView>
+</VBox>
