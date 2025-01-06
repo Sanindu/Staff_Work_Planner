@@ -4,7 +4,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 
 import java.io.FileInputStream;
@@ -35,7 +37,27 @@ public class TotalHoursController {
         totalHoursColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTotalHours()));
 
         totalHoursTable.setItems(getTotalHoursList());
+
+        totalHoursColumn.setCellFactory(column -> new TableCell<StaffHours, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(item);
+                    if (Double.parseDouble(item) > 1570) {
+                        getStyleClass().add("red-cell");
+                    } else {
+                        getStyleClass().remove("red-cell");
+                    }
+                }
+            }
+        });
     }
+
+
 
     private void loadStaffData() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("staff.ser"))) {

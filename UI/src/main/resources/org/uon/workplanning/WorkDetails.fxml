@@ -29,10 +29,14 @@
         </columns>
 
     </TableView>
+    <HBox spacing="10">
+        <TextField fx:id="searchField" promptText="Search by Staff ID" onKeyReleased="#handleSearch"/>
+    </HBox>
         <HBox spacing="10">
             <Button text="Add New Work" onAction="#handleAddNewWork"/>
             <Button text="Edit Work" onAction="#handleEditWork"/>
             <Button text="Delete Work" onAction="#handleDeleteWork"/>
             <Button text="Total Hours" onAction="#handleShowTotalHours"/>
+            <Button text="Refresh" onAction="#handleRefresh"/>
         </HBox>
 </VBox>

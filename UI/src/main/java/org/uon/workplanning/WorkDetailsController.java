@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
@@ -53,6 +54,11 @@ public class WorkDetailsController {
     private Set<String> distinctTypes = new HashSet<>();
     private Map<String, String> staffData = new HashMap<>();
 
+    @FXML
+    private TextField searchField;
+    private ObservableList<Work> workList = FXCollections.observableArrayList();
+
+
     public void initialize() {
         loadStaffData();
         loadDistinctTypes();
@@ -76,8 +82,14 @@ public class WorkDetailsController {
             String staffId = String.valueOf(work.getStaffId());
             return new SimpleStringProperty(staffData.getOrDefault(staffId, "Unknown"));
         });
-
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> filterWorkList(newValue));
         workTable.setItems(getWorkList());
+        handleRefresh();
+    }
+    @FXML
+    private void handleSearch() {
+        String searchText = searchField.getText();
+        filterWorkList(searchText);
     }
 
     // Method to load staff data from staff.ser
@@ -92,6 +104,11 @@ public class WorkDetailsController {
         }
     }
 
+    @FXML
+    private void handleRefresh() {
+        workList = getWorkList();
+        workTable.setItems(workList);
+    }
 
     // Loading the workdetails.ser file
     private ObservableList<Work> getWorkList() {
@@ -239,6 +256,25 @@ public class WorkDetailsController {
             e.printStackTrace();
         }
     }
+    private void filterWorkList(String searchText) {
+        if (searchText == null || searchText.isEmpty()) {
+            workTable.setItems(workList);
+        } else {
+            ObservableList<Work> filteredList = FXCollections.observableArrayList();
+            String lowerCaseFilter = searchText.toLowerCase();
+
+            for (Work work : workList) {
+                String staffId = String.valueOf(work.getStaffId());
+                String fullName = staffData.getOrDefault(staffId, "Unknown");
+
+                if (staffId.contains(lowerCaseFilter) || fullName.toLowerCase().contains(lowerCaseFilter)) {
+                    filteredList.add(work);
+                }
+            }
+            workTable.setItems(filteredList);
+        }
+    }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
