@@ -9,7 +9,7 @@ public class CSVEditor extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Dynamic CSV Table Viewer");
+        primaryStage.setTitle("CSV Table Viewer");
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("CSVEditor.fxml"))));
         primaryStage.show();
     }

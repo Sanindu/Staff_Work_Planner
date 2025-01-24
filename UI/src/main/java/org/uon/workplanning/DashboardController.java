@@ -45,7 +45,7 @@ public class DashboardController {
     }
 
     private void handleCsvUploadTileClick(MouseEvent event) {
-        switchToView("CSVUploadView.fxml", "CSV Upload");
+        switchToView("CSVEditor.fxml", "CSV Upload");
     }
 
     private void switchToView(String fxmlFile, String title) {
