@@ -13,5 +13,5 @@
     <GridPane fx:id="editGridPane" hgap="10" vgap="10">
         <!-- The input fields will be dynamically added here -->
     </GridPane>
-    <Button text="Save" onAction="#handleSave" />
+    <Button text="Ok" onAction="#handleSave" />
 </VBox>

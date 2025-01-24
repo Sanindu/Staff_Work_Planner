@@ -79,20 +79,7 @@ public class CSVEditorController {
     }
 
 
-//    public void saveCsv(File file) {
-//        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-//            bw.write(String.join(",", headers) + "\n");
-//            for (CsvRow row : tableView.getItems()) {
-//                List<String> values = new ArrayList<>();
-//                for (String header : headers) {
-//                    values.add(row.getColumn(header).get());
-//                }
-//                bw.write(String.join(",", values) + "\n");
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
     public void handleEdit(ActionEvent event) {
         CsvRow selectedRow = tableView.getSelectionModel().getSelectedItem();
         if (selectedRow != null) {
@@ -126,6 +113,10 @@ public class CSVEditorController {
     private void handleSaveChanges(ActionEvent event) {
         if (currentFile != null) {
             saveCsv(currentFile);
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Changes Saved Successfully");
+            alert.showAndWait();
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("No File Loaded");

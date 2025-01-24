@@ -14,6 +14,6 @@
         <HBox spacing="10">
                 <Button text="Upload CSV" onAction="#handleUpload"/>
                 <Button text="Edit Record" onAction="#handleEdit"/>
-                <Button text="Save Changes" onAction="#handleSaveChanges"/>
+                <Button text="Apply Changes" onAction="#handleSaveChanges"/>
         </HBox>
 </VBox>
