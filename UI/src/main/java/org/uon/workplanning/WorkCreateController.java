@@ -39,13 +39,15 @@ public class WorkCreateController {
     @FXML
     private TextField instancesField;
 
-
+    // Initialisation method to set default values and load data for combo boxes
     public void initialize() {
         yearComboBox.setValue("Trimester 1");
         loadStaffIds();
         loadTypes();
         loadActivity();
     }
+
+    // Load staff IDs into the combo box
     private void loadStaffIds() {
         List<String> staffIds = readStaffList().stream()
                 .map(staff -> String.valueOf(staff.getStaffId()))
@@ -54,6 +56,7 @@ public class WorkCreateController {
         staffIdComboBox.setItems(observableStaffIds);
     }
 
+    // Method to read the list of staff from the serialised file
     private List<Staff> readStaffList() {
         List<Staff> staffList = new ArrayList<>();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("staff.ser"))) {
@@ -66,6 +69,7 @@ public class WorkCreateController {
         return staffList;
     }
 
+    // Load types into the combo box
     private void loadTypes() {
         List<String> typeIds = readTypeList().stream()
                 .map(type -> String.valueOf(type.getType()))
@@ -74,6 +78,7 @@ public class WorkCreateController {
         typeComboBox.setItems(observableTypeIds);
     }
 
+    // Method to read the list of activity types from the serialised file
     private List<Activity> readTypeList() {
         List<Activity> activityList = new ArrayList<>();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("activity.ser"))) {
@@ -86,6 +91,7 @@ public class WorkCreateController {
         return activityList;
     }
 
+    // Load activities into the combo box
     private void loadActivity() {
         List<String> activityIds = readActivityList().stream()
                 .map(activity -> String.valueOf(activity.getActivity()))
@@ -94,6 +100,7 @@ public class WorkCreateController {
         activityComboBox.setItems(observableActivityIds);
     }
 
+    // Method to read the list of activities from the serialised file
     private List<Activity> readActivityList() {
         List<Activity> activityList = new ArrayList<>();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("activity.ser"))) {
@@ -106,8 +113,10 @@ public class WorkCreateController {
         return activityList;
     }
 
+    // Handle save button click event
     @FXML
     private void handleSave() {
+        // Generate a new work ID
         int newWorkId = getLastWorkId() + 1;
         int staffId = Integer.parseInt(staffIdComboBox.getValue());
         String type = typeComboBox.getValue();
@@ -117,41 +126,46 @@ public class WorkCreateController {
         int activityDuration = Integer.parseInt(activityDurationField.getText());
         int instances = Integer.parseInt(instancesField.getText());
         int hours = calHours();
-int t1 =0;
-int t2 =0;
-int t3 = 0;
-int allYear =0;
-        switch (week){
+        int t1 = 0;
+        int t2 = 0;
+        int t3 = 0;
+        int allYear = 0;
+
+        // Set trimester hours based on the selected week value
+        switch (week) {
             case "Trimester 1":
-                 t1 = hours;
+                t1 = hours;
                 break;
             case "Trimester 2":
-                 t2 =hours;
+                t2 = hours;
                 break;
             case "Trimester 3":
-                 t3 = hours;
+                t3 = hours;
                 break;
             case "All Year":
-                 allYear = hours;
+                allYear = hours;
                 break;
         }
-        double sum = 0;
-        if (type.equals("ATSR")){
+
+        double sum;
+        if (type.equals("ATSR")) {
             double tsWeight = Double.parseDouble((ConfigLoader.getTSValue()));
-            double tsVale =(tsWeight * hours);
-            sum = (hours+tsVale);
-        }
-        else {
+            double tsValue = (tsWeight * hours);
+            sum = (hours + tsValue);
+        } else {
             sum = hours;
         }
 
-        Work work = new Work(newWorkId,staffId,type,activity,description,week,activityDuration, instances,hours,t1,t2,t3,allYear,sum);
+        // Create a new Work object
+        Work work = new Work(newWorkId, staffId, type, activity, description, week, activityDuration, instances, hours, t1, t2, t3, allYear, sum);
         List<Work> workList = readWorkList();
-        workList.add(work);
+        workList.add(work); // Add the new work to the list
 
+        // Serialise the updated work list
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("workdetails.ser"))) {
             oos.writeObject(workList);
             showAlert("Success", "New work details added successfully!");
+            // Close the creation window
             Stage stage = (Stage) descriptionField.getScene().getWindow();
             stage.close();
         } catch (Exception ex) {
@@ -159,14 +173,18 @@ int allYear =0;
         }
     }
 
-private int calHours(){
-        return (Integer.parseInt(activityDurationField.getText())*Integer.parseInt(instancesField.getText()));
-}
+    // Method to calculate the total hours based on activity duration and instances
+    private int calHours() {
+        return (Integer.parseInt(activityDurationField.getText()) * Integer.parseInt(instancesField.getText()));
+    }
+
+    // Method to get the last saved work ID
     private int getLastWorkId() {
         List<Work> workList = readWorkList();
         return workList.stream().mapToInt(Work::getWorkId).max().orElse(0);
     }
 
+    // Method to read the work list from the serialised file
     @SuppressWarnings("unchecked")
     private List<Work> readWorkList() {
         List<Work> workList = new ArrayList<>();
@@ -182,7 +200,7 @@ private int calHours(){
         return workList;
     }
 
-
+    // Method to show an alert with the given title and message
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -190,8 +208,11 @@ private int calHours(){
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    // Handle cancel button click event
     @FXML
     private void handleCancel() {
+        // Close the creation window without saving
         Stage stage = (Stage) descriptionField.getScene().getWindow();
         stage.close();
     }

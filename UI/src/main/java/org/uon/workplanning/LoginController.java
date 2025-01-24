@@ -24,22 +24,26 @@ public class LoginController {
 
     @FXML
     private void initialize() {
+        // Load login data when the controller is initialised
         loadLoginData();
     }
 
+    // Method to load login data from the serialized file
     private void loadLoginData() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("staff.ser"))) {
             staffList = (List<Staff>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Print any exceptions that occur
         }
     }
 
+    // Method to handle the login process
     @FXML
     private void handleLogin() {
         int staffID = Integer.parseInt(staffIDField.getText());
         String password = passwordField.getText();
 
+        // Find the staff member with the matching ID and password
         Staff staffMember = staffList.stream()
                 .filter(staff -> staff.getStaffId() == staffID && staff.getPassword().equals(password))
                 .findFirst()
@@ -48,6 +52,7 @@ public class LoginController {
         if (staffMember != null) {
             String role = staffMember.getRole();
             if(role.equals("Admin")){
+                // Load and display the Admin Dashboard
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
                     Parent parent = loader.load();
@@ -60,6 +65,7 @@ public class LoginController {
                 }
             }
             else{
+                // Load and display the User Dashboard
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("UserDashboard.fxml"));
                     Parent parent = loader.load();
@@ -73,10 +79,12 @@ public class LoginController {
             }
 
         } else {
+            // Show an alert if the login failed
             showAlert("Login Failed", "Invalid staff ID or password. Please try again.");
         }
     }
 
+    // Method to show an alert with the given title and message
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

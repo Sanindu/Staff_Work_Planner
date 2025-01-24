@@ -29,6 +29,7 @@ public class TotalHoursController {
 
     private Map<String, String> staffData = new HashMap<>();
 
+    // Initialisation method to set up the table columns and load the staff data
     @FXML
     public void initialize() {
         loadStaffData();
@@ -38,6 +39,7 @@ public class TotalHoursController {
 
         totalHoursTable.setItems(getTotalHoursList());
 
+        // Set the cell factory to customise the appearance of the total hours column
         totalHoursColumn.setCellFactory(column -> new TableCell<StaffHours, String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -48,7 +50,7 @@ public class TotalHoursController {
                 } else {
                     setText(item);
                     if (Double.parseDouble(item) > 1570) {
-                        getStyleClass().add("red-cell");
+                        getStyleClass().add("red-cell"); // Highlight cells with hours greater than 1570
                     } else {
                         getStyleClass().remove("red-cell");
                     }
@@ -57,8 +59,7 @@ public class TotalHoursController {
         });
     }
 
-
-
+    // Method to load staff data from the serialised file
     private void loadStaffData() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("staff.ser"))) {
             List<Staff> staffList = (List<Staff>) ois.readObject();
@@ -70,6 +71,7 @@ public class TotalHoursController {
         }
     }
 
+    // Method to get the total hours list from the serialised file
     private ObservableList<StaffHours> getTotalHoursList() {
         Map<String, Double> staffHoursMap = new HashMap<>();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("workdetails.ser"))) {

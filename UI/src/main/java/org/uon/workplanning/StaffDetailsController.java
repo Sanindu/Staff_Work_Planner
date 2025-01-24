@@ -36,7 +36,10 @@ public class StaffDetailsController {
     private TableColumn<Staff, String> lineManagerColumn;
     @FXML
     private TableColumn<Staff, String> roleColumn;
+
     private ObservableList<Staff> staffList = FXCollections.observableArrayList();
+
+    // Initialisation method to set up the table columns and load the staff list
     @FXML
     private void initialize() {
         staffIdColumn.setCellValueFactory(new PropertyValueFactory<>("staffId"));
@@ -52,6 +55,7 @@ public class StaffDetailsController {
         staffTable.setItems(getStaffList());
     }
 
+    // Method to get the staff list from the serialized file
     private ObservableList<Staff> getStaffList() {
         List<Staff> staffList = new ArrayList<>();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("staff.ser"))) {
@@ -66,6 +70,7 @@ public class StaffDetailsController {
         return FXCollections.observableArrayList(staffList);
     }
 
+    // Handle adding a new staff member
     @FXML
     private void handleAddNewStaff() {
         try {
@@ -81,6 +86,7 @@ public class StaffDetailsController {
         }
     }
 
+    // Handle editing the selected staff member
     @FXML
     private void handleEditStaff() {
         Staff selectedStaff = staffTable.getSelectionModel().getSelectedItem();
@@ -107,7 +113,7 @@ public class StaffDetailsController {
         }
     }
 
-
+    // Handle deleting the selected staff member
     @FXML
     private void handleDeleteStaff() {
         Staff selectedStaff = staffTable.getSelectionModel().getSelectedItem();
@@ -119,6 +125,7 @@ public class StaffDetailsController {
         }
     }
 
+    // Method to save the staff list to the serialized file
     private void saveStaffList() {
         List<Staff> staffList = new ArrayList<>(staffTable.getItems());
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("staff.ser"))) {
@@ -127,11 +134,15 @@ public class StaffDetailsController {
             e.printStackTrace();
         }
     }
+
+    // Handle refreshing the staff list
     @FXML
     private void handleRefresh() {
         staffList = getStaffList();
         staffTable.setItems(staffList);
     }
+
+    // Method to show an alert with the given title and message
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);

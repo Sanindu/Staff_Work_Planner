@@ -31,6 +31,8 @@ public class CSVEditorController {
 
     private List<String> headers;
     private File currentFile;
+
+    // Handle file upload
     public void handleUpload(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
@@ -42,6 +44,7 @@ public class CSVEditorController {
         }
     }
 
+    // Load CSV file and display its content in the TableView
     private void loadCsv(File file) {
         List<CsvRow> rows = new ArrayList<>();
         headers = new ArrayList<>();
@@ -78,8 +81,7 @@ public class CSVEditorController {
         tableView.getItems().setAll(rows);
     }
 
-
-
+    // Handle editing of selected CSV row
     public void handleEdit(ActionEvent event) {
         CsvRow selectedRow = tableView.getSelectionModel().getSelectedItem();
         if (selectedRow != null) {
@@ -101,6 +103,7 @@ public class CSVEditorController {
                 e.printStackTrace();
             }
         } else {
+            // Show warning alert if no row is selected
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Record Selected");
@@ -109,15 +112,18 @@ public class CSVEditorController {
         }
     }
 
+    // Handle saving changes to the CSV file
     @FXML
     private void handleSaveChanges(ActionEvent event) {
         if (currentFile != null) {
             saveCsv(currentFile);
+            // Show success alert
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("Changes Saved Successfully");
             alert.showAndWait();
         } else {
+            // Show error alert if no file is loaded
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("No File Loaded");
             alert.setHeaderText("No CSV File Loaded");
@@ -126,6 +132,7 @@ public class CSVEditorController {
         }
     }
 
+    // Save the updated data back to the CSV file
     private void saveCsv(File file) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
             bw.write(String.join(",", headers) + "\n");

@@ -23,24 +23,6 @@ public class StaffRegister extends Application {
         }
     }
 
-//    public static void switchToRegisterView() {
-//        try {
-//            Parent root = FXMLLoader.load(StaffRegister.class.getResource("StaffRegister.fxml"));
-//            primaryStage.setScene(new Scene(root, 400, 450));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public static void switchToDetailsView() {
-//        try {
-//            Parent root = FXMLLoader.load(StaffRegister.class.getResource("StaffDetails.fxml"));
-//            primaryStage.setScene(new Scene(root, 800, 600));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public static void main(String[] args) {
         launch(args);
     }

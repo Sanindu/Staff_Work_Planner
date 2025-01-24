@@ -24,6 +24,7 @@ public class DashboardController {
     @FXML
     private VBox csvUploadTile;
 
+    // Initialize method to set click event handlers for the tiles
     @FXML
     public void initialize() {
         staffTile.setOnMouseClicked(this::handleStaffTileClick);
@@ -32,22 +33,27 @@ public class DashboardController {
         csvUploadTile.setOnMouseClicked(this::handleCsvUploadTileClick);
     }
 
+    // Handle click event for the staff tile
     private void handleStaffTileClick(MouseEvent event) {
         switchToView("StaffDetails.fxml", "Staff");
     }
 
+    // Handle click event for the work details tile
     private void handleWorkDetailsTileClick(MouseEvent event) {
         switchToView("WorkDetails.fxml", "Work Details");
     }
 
+    // Handle click event for the activity tile
     private void handleActivityTileClick(MouseEvent event) {
         switchToView("ActivityDetails.fxml", "Activity");
     }
 
+    // Handle click event for the CSV upload tile
     private void handleCsvUploadTileClick(MouseEvent event) {
         switchToView("CSVEditor.fxml", "CSV Upload");
     }
 
+    // Switch to the specified view by loading the FXML file
     private void switchToView(String fxmlFile, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));

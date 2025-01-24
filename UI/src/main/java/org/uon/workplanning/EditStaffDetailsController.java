@@ -28,6 +28,7 @@ public class EditStaffDetailsController {
 
     private Staff staff;
 
+    // Method to set the staff object and initialize the text fields and combo boxes with its data
     public void setStaff(Staff staff) {
         this.staff = staff;
         fullNameField.setText(staff.getFullName());
@@ -43,12 +44,15 @@ public class EditStaffDetailsController {
 
     @FXML
     private void initialize() {
+        // Initialize the employment type and role combo boxes with options
         employmentTypeComboBox.getItems().addAll("Full Time", "Part Time");
         roleComboBox.getItems().addAll("Admin", "User");
     }
 
+    // Handle save button click event
     @FXML
     private void handleSave() {
+        // Update the staff object with the values from the text fields and combo boxes
         staff.setFullName(fullNameField.getText());
         staff.setEmail(emailField.getText());
         staff.setContactNumber(contactNumberField.getText());
@@ -66,9 +70,10 @@ public class EditStaffDetailsController {
         stage.close();
     }
 
+    // Handle cancel button click event
     @FXML
     private void handleCancel() {
-        // Close the dialog without saving
+        // Close the dialog without saving changes
         Stage stage = (Stage) fullNameField.getScene().getWindow();
         stage.close();
     }

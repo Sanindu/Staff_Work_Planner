@@ -12,20 +12,21 @@ import java.io.IOException;
 
 public class UserDashboardController {
 
-
     @FXML
     private VBox workDetailsTile;
+
+    // Initialisation method to set the click event handler for the work details tile
     @FXML
     public void initialize() {
         workDetailsTile.setOnMouseClicked(this::handleWorkDetailsTileClick);
     }
 
-
-
+    // Handle click event for the work details tile
     private void handleWorkDetailsTileClick(MouseEvent event) {
         switchToView("WorkDetails.fxml", "Work Details");
     }
 
+    // Switch to the specified view by loading the FXML file
     private void switchToView(String fxmlFile, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));

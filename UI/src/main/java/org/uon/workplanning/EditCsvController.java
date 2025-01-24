@@ -17,6 +17,7 @@ public class EditCsvController {
     private CsvRow row;
     private Map<String, TextField> textFields;
 
+    // Method to set the row to be edited and initialize text fields with column values
     public void setRow(CsvRow row, List<String> headers) {
         this.row = row;
         this.textFields = new HashMap<>();
@@ -32,9 +33,11 @@ public class EditCsvController {
 
     @FXML
     private void handleSave() {
+        // Update the row with the values from the text fields
         for (Map.Entry<String, TextField> entry : textFields.entrySet()) {
             row.addColumn(entry.getKey(), entry.getValue().getText());
         }
+        // Close the dialog
         Stage stage = (Stage) editGridPane.getScene().getWindow();
         stage.close();
     }

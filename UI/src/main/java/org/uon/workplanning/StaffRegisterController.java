@@ -29,9 +29,10 @@ public class StaffRegisterController {
     @FXML
     private ComboBox<String> roleComboBox;
 
+    // Handle registration process
     @FXML
     private void handleRegister() {
-        // Gather data
+        // Gather data from input fields
         String fullName = nameField.getText();
         String email = emailField.getText();
         String contactNumber = contactField.getText();
@@ -53,25 +54,27 @@ public class StaffRegisterController {
 
         // Read existing staff list
         List<Staff> staffList = readStaffList();
-        staffList.add(staff);
+        staffList.add(staff); // Add the new staff to the list
 
         // Serialize staff list
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("staff.ser"))) {
-            oos.writeObject(staffList);
+            oos.writeObject(staffList); // Write the list to the file
             showAlert("Success", "Staff registered successfully!");
+            // Close the registration window
             Stage stage = (Stage) emailField.getScene().getWindow();
             stage.close();
-
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.printStackTrace(); // Print any exceptions that occur
         }
     }
 
+    // Method to get the last saved staff ID
     private int getLastStaffId() {
         List<Staff> staffList = readStaffList();
         return staffList.stream().mapToInt(Staff::getStaffId).max().orElse(0);
     }
 
+    // Method to read the staff list from the serialised file
     @SuppressWarnings("unchecked")
     private List<Staff> readStaffList() {
         List<Staff> staffList = new ArrayList<>();
@@ -82,15 +85,20 @@ public class StaffRegisterController {
         } catch (FileNotFoundException e) {
             // File not found, return empty list
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Print any exceptions that occur
         }
         return staffList;
     }
+
+    // Handle cancel button click event
     @FXML
     private void handleCancel() {
+        // Close the registration window without saving
         Stage stage = (Stage) emailField.getScene().getWindow();
         stage.close();
     }
+
+    // Method to show an alert with the given title and message
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);

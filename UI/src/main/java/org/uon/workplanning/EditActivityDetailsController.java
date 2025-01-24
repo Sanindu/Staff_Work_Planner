@@ -14,6 +14,7 @@ public class EditActivityDetailsController {
 
     private Activity activity;
 
+    // Method to set the activity object and initialize the text fields with its data
     public void setActivity(Activity activity) {
         this.activity = activity;
         typeField.setText(activity.getType());
@@ -24,8 +25,10 @@ public class EditActivityDetailsController {
     private void initialize() {
     }
 
+    // Handle save button click event
     @FXML
     private void handleSave() {
+        // Update the activity object with the values from the text fields
         activity.setType(typeField.getText());
         activity.setActivity(activityField.getText());
 
@@ -34,9 +37,10 @@ public class EditActivityDetailsController {
         stage.close();
     }
 
+    // Handle cancel button click event
     @FXML
     private void handleCancel() {
-        // Close the dialog without saving
+        // Close the dialog without saving changes
         Stage stage = (Stage) typeField.getScene().getWindow();
         stage.close();
     }
