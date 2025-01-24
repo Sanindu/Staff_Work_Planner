@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="org.uon.workplanning.CSVEditorController">
+        <VBox>
+                <TableView fx:id="tableView"/>
+                <Region minHeight="10"/> <!-- This adds spacing after the TableView -->
+        </VBox>
+        <HBox spacing="10">
+                <Button text="Upload CSV" onAction="#handleUpload"/>
+                <Button text="Edit Record" onAction="#handleEdit"/>
+                <Button text="Save Changes" onAction="#handleSaveChanges"/>
+        </HBox>
+</VBox>

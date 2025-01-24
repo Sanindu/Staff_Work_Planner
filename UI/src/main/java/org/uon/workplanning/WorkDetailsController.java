@@ -162,7 +162,7 @@ public class WorkDetailsController {
             typeColumn.setCellValueFactory(cellData -> {
                 Work work = cellData.getValue();
                 if (work.getType().equals("ATSR")) {
-                    // Set the value of 'TS' column to 1.2 * hours value
+
                     double tsWeight = Double.parseDouble((ConfigLoader.getTSValue()));
                     double tsVale =(tsWeight * work.getHours());
                     String formattedValue = String.format("%.2f", tsVale);
@@ -177,7 +177,7 @@ public class WorkDetailsController {
             typeColumn.setOnEditCommit(event -> {
                 Work work = event.getRowValue();
                 work.setTypeValue(type, event.getNewValue());
-                saveWorkList(); // Save changes to the file
+                saveWorkList();
             });
             workTable.getColumns().add(typeColumn);
         }

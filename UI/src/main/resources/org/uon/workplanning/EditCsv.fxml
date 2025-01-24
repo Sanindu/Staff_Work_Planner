@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="org.uon.workplanning.EditCsvController" spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <GridPane fx:id="editGridPane" hgap="10" vgap="10">
+        <!-- The input fields will be dynamically added here -->
+    </GridPane>
+    <Button text="Save" onAction="#handleSave" />
+</VBox>
