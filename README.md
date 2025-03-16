@@ -40,6 +40,7 @@ JIRA Project Link:
 https://sanindu.atlassian.net/jira/software/projects/ECS/list?direction=ASC&sortBy=duedate&atlOrigin=eyJpIjoiOTdlNjEyYjU1YzViNGE3OGI5ZGMxODY5ZjQyNDJmOGYiLCJwIjoiaiJ9
 
 <br>
+
 ![App Screenshot](images/blackbox.png)
 
 ## WhiteBox Testings - JUnit
