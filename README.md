@@ -32,7 +32,7 @@ This Java application helps manage staff workload allocation by recording staff 
 - **FXML** – UI layout structure 
 
 ## Class Diagram 
-
+![App Screenshot](images/class.png)
 ## WhiteBox Testings - JUnit
 
 ## BlackBox Testings - Recorded in JIRA
