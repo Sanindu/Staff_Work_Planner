@@ -38,26 +38,34 @@ This Java application helps manage staff workload allocation by recording staff 
 ## BlackBox Testings - Recorded in JIRA
 JIRA Project Link: 
 https://sanindu.atlassian.net/jira/software/projects/ECS/list?direction=ASC&sortBy=duedate&atlOrigin=eyJpIjoiOTdlNjEyYjU1YzViNGE3OGI5ZGMxODY5ZjQyNDJmOGYiLCJwIjoiaiJ9
-## Login
+![App Screenshot](images/blackbox.png)
+
+## WhiteBox Testings - JUnit
+![App Screenshot](images/whitebox.png)
 
 ## Login
+![App Screenshot](images/1.png)
+![App Screenshot](images/2.png)
 
-## Seperate Views for Normal users and Admins
+## Seperate Dashboards for Normal users and Admins
+![App Screenshot](images/3.png)
 
 ## Add new User
+![App Screenshot](images/4.png)
+![App Screenshot](images/5.png)
 
 ## Edit User
-
-## Add Activity Type
-
-## Edit Activity Type
+![App Screenshot](images/6.png)
 
 ## Add Workload for a staff member
 
+![App Screenshot](images/9.png)
+![App Screenshot](images/10.png)
+
 ## Edit workload for a staf member
-
+![App Screenshot](images/11.png)
 ## Calculate total hours of staff members
-
+![App Screenshot](images/12.png)
 
 
 ## Setup and Installation  
