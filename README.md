@@ -26,6 +26,7 @@ This Java application helps manage staff workload allocation by recording staff 
 
 ## Technology Stack  
 - **Java** – Core programming language
+- **JUnit** – White box testings
 - **JavaFX** – User interface    
 - **Object Serialisation** – Data persistence    
 - **FXML** – UI layout structure  
