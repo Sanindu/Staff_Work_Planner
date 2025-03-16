@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class ConsoleAppActivity {
     private List<Activity> activityList;
 
-    // Constructor to initialize the activity list
+    // Constructor to initialise the activity list
     public ConsoleAppActivity(List<Activity> activityList) {
         this.activityList = activityList;
     }
