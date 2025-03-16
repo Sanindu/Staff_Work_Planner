@@ -33,10 +33,10 @@ This Java application helps manage staff workload allocation by recording staff 
 
 ## Class Diagram 
 
-## White Box Testings - JUnit
+## WhiteBox Testings - JUnit
 
-## Black Box Testings - Recorded in JIRA
-
+## BlackBox Testings - Recorded in JIRA
+![App Screenshot] (https://sanindu.atlassian.net/jira/software/projects/ECS/list?direction=ASC&sortBy=duedate&atlOrigin=eyJpIjoiOTdlNjEyYjU1YzViNGE3OGI5ZGMxODY5ZjQyNDJmOGYiLCJwIjoiaiJ9)
 ## Login
 
 ## Login
