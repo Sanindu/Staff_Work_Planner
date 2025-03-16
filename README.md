@@ -31,6 +31,12 @@ This Java application helps manage staff workload allocation by recording staff 
 - **Object Serialisation** – Data persistence    
 - **FXML** – UI layout structure  
 
+## White Box Testings - JUnit
+
+## Black Box Testings - Recorded in JIRA
+
+## Login
+
 ## Login
 
 ## Seperate Views for Normal users and Admins
