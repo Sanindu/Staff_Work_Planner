@@ -29,7 +29,9 @@ This Java application helps manage staff workload allocation by recording staff 
 - **JUnit** – White box testings
 - **JavaFX** – User interface    
 - **Object Serialisation** – Data persistence    
-- **FXML** – UI layout structure  
+- **FXML** – UI layout structure 
+
+## Class Diagram 
 
 ## White Box Testings - JUnit
 
