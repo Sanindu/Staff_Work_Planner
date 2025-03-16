@@ -6,14 +6,14 @@ This Java application helps manage staff workload allocation by recording staff 
 ## Features  
 
 - ✅ Record details of a new staff member.
-- ✅ Assign teaching and other duties to staff.  
+- ✅ Assign duties to staff.  
 - ✅ Calculate and display workload allocation for each staff member.  
 - ✅ Permanent storage of data using object serialisation  
 - ✅ Import workload data from a CSV file  
 - ✅ Read/update workload allocation formulas from a CSV file  
-- ✅ View workload details for all staff in a specific subject area  
+- ✅ View workload details for all staff in a specific area  
 - ✅ Search staff members or modules by name/ID  
-- ✅ User authentication - role based (Login system) 
+- ✅ Role based user authentication (Login system) 
 
 ## Usage  
 - **Add, Edit, Delete Staff:** Enter details in the form and save.
